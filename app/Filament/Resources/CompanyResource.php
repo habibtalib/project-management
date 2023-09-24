@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CompanyResource\Pages;
-use App\Filament\Resources\CompanyResource\RelationManagers;
-use App\Models\Company;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use App\Models\User;
 use Filament\Tables;
+use App\Models\Company;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\CompanyResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\CompanyResource\RelationManagers;
 
 class CompanyResource extends Resource
 {
@@ -40,7 +41,11 @@ class CompanyResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('owner_id')
+                Forms\Components\Select::make('owner_id')
+                    ->label(__('Project owner'))
+                    ->searchable()
+                    ->options(fn () => User::all()->pluck('name', 'id')->toArray())
+                    ->default(fn () => auth()->user()->id)
                     ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
@@ -57,16 +62,16 @@ class CompanyResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('city')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('city_id')
-                    ->maxLength(255),
+                // Forms\Components\TextInput::make('city_id')
+                //     ->maxLength(255),
                 Forms\Components\TextInput::make('state')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('state_id')
-                    ->maxLength(255),
+                // Forms\Components\TextInput::make('state_id')
+                //     ->maxLength(255),
                 Forms\Components\TextInput::make('country')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('country_id')
-                    ->maxLength(255),
+                // Forms\Components\TextInput::make('country_id')
+                //     ->maxLength(255),
                 Forms\Components\TextInput::make('postcode')
                     ->maxLength(255),
             ]);
@@ -76,25 +81,25 @@ class CompanyResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('owner_id'),
+                Tables\Columns\TextColumn::make('owner.name'),
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('registration_number'),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('phone_number'),
-                Tables\Columns\TextColumn::make('address'),
-                Tables\Columns\TextColumn::make('city'),
-                Tables\Columns\TextColumn::make('city_id'),
-                Tables\Columns\TextColumn::make('state'),
-                Tables\Columns\TextColumn::make('state_id'),
-                Tables\Columns\TextColumn::make('country'),
-                Tables\Columns\TextColumn::make('country_id'),
-                Tables\Columns\TextColumn::make('postcode'),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                // Tables\Columns\TextColumn::make('address'),
+                // Tables\Columns\TextColumn::make('city'),
+                // Tables\Columns\TextColumn::make('city_id'),
+                // Tables\Columns\TextColumn::make('state'),
+                // Tables\Columns\TextColumn::make('state_id'),
+                // Tables\Columns\TextColumn::make('country'),
+                // Tables\Columns\TextColumn::make('country_id'),
+                // Tables\Columns\TextColumn::make('postcode'),
+                // Tables\Columns\TextColumn::make('deleted_at')
+                //     ->dateTime(),
+                // Tables\Columns\TextColumn::make('created_at')
+                //     ->dateTime(),
+                // Tables\Columns\TextColumn::make('updated_at')
+                //     ->dateTime(),
             ])
             ->filters([
                 //

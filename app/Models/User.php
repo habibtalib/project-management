@@ -22,8 +22,14 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 {
-    use HasApiTokens, HasFactory, Notifiable, TwoFactorAuthenticatable,
-        HasRoles, HasAvatarUrl, SoftDeletes, MustVerifyNewEmail;
+    use HasApiTokens,
+        HasFactory,
+        Notifiable,
+        TwoFactorAuthenticatable,
+        HasRoles,
+        HasAvatarUrl,
+        SoftDeletes,
+        MustVerifyNewEmail;
 
     /**
      * The attributes that are mass assignable.
@@ -110,6 +116,11 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
     public function hours(): HasMany
     {
         return $this->hasMany(TicketHour::class, 'user_id', 'id');
+    }
+
+    public function companies(): HasMany
+    {
+        return $this->hasMany(Company::class, 'owner_id', 'id');
     }
 
     public function totalLoggedInHours(): Attribute

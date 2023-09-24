@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Settings\GeneralSettings;
 use Filament\Facades\Filament;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Vite;
 use Illuminate\Support\Facades\Config;
@@ -31,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         // Configure application
+        Model::unguard();
         $this->configureApp();
 
         // Register custom Filament theme

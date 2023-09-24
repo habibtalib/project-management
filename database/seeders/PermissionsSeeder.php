@@ -54,6 +54,22 @@ class PermissionsSeeder extends Seeder
                     'name' => $action . ' ' . $singular
                 ]);
             }
+
+            Permission::firstOrCreate([
+                'name' => 'View Timesheet Export'
+            ]);
+
+            Permission::firstOrCreate([
+                'name' => 'View RoadMap'
+            ]);
+
+            Permission::firstOrCreate([
+                'name' => 'View kanban'
+            ]);
+
+            Permission::firstOrCreate([
+                'name' => 'View Board'
+            ]);
         }
 
         foreach ($this->extraPermissions as $permission) {

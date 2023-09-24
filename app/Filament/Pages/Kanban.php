@@ -43,6 +43,12 @@ class Kanban extends Page implements HasForms
         $this->form->fill();
     }
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('View kanban');
+        // return true;
+    }
+
     protected function getActions(): array
     {
         return [
@@ -66,5 +72,4 @@ class Kanban extends Page implements HasForms
     {
         return $this->formSchema();
     }
-
 }

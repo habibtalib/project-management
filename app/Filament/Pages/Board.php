@@ -30,7 +30,8 @@ class Board extends Page implements HasForms
 
     protected static function shouldRegisterNavigation(): bool
     {
-        return auth()->user()->can('Manage Board');
+        return auth()->user()->can('View Board');
+        // return true;
     }
 
     public function mount(): void

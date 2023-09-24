@@ -45,6 +45,12 @@ class RoadMap extends Page implements HasForms
         return __('Management');
     }
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('View RoadMap');
+        // return true;
+    }
+
     public function mount()
     {
         $p = request()->get('p');

@@ -50,6 +50,11 @@ class Project extends Model implements HasMedia
         return $this->hasMany(TicketStatus::class, 'project_id', 'id');
     }
 
+    public function costs(): HasMany
+    {
+        return $this->hasMany(ProjectCost::class, 'project_id', 'id');
+    }
+
     public function epics(): HasMany
     {
         return $this->hasMany(Epic::class, 'project_id', 'id');
@@ -100,7 +105,7 @@ class Project extends Model implements HasMedia
     public function cover(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->media('cover')?->first()?->getFullUrl()
+            get: fn () => $this->media('cover')?->first()?->getFullUrl()
                 ??
                 'https://ui-avatars.com/api/?background=3f84f3&color=ffffff&name=' . $this->name
         );
@@ -109,7 +114,7 @@ class Project extends Model implements HasMedia
     public function currentSprint(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->sprints()
+            get: fn () => $this->sprints()
                 ->whereNotNull('started_at')
                 ->whereNull('ended_at')
                 ->first()

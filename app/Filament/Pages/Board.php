@@ -28,6 +28,11 @@ class Board extends Page implements HasForms
         return __("In this section you can choose one of your projects to show it's Scrum or Kanban board");
     }
 
+    protected static function shouldRegisterNavigation(): bool
+    {
+        return auth()->user()->can('Manage Board');
+    }
+
     public function mount(): void
     {
         $this->form->fill();
@@ -58,7 +63,7 @@ class Board extends Page implements HasForms
                                 ->reactive()
                                 ->afterStateUpdated(fn () => $this->search())
                                 ->helperText(__("Choose a project to show it's board"))
-                                ->options(fn() => Project::where('owner_id', auth()->user()->id)
+                                ->options(fn () => Project::where('owner_id', auth()->user()->id)
                                     ->orWhereHas('users', function ($query) {
                                         return $query->where('users.id', auth()->user()->id);
                                     })->pluck('name', 'id')->toArray()),

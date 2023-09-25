@@ -12,6 +12,8 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Facades\Hash;
+use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 
 class UserResource extends Resource
 {
@@ -63,6 +65,8 @@ class UserResource extends Resource
 
                                 Forms\Components\TextInput::make('password')
                                     ->label(__('Password'))
+                                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                                    ->dehydrated(fn ($state) => filled($state))
                                     ->password(),
 
                                 Forms\Components\CheckboxList::make('roles')
@@ -125,6 +129,7 @@ class UserResource extends Resource
     {
         return [
             //
+            AuditsRelationManager::class,
         ];
     }
 

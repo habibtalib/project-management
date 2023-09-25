@@ -2,19 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class Project extends Model implements HasMedia
+class Project extends Model implements HasMedia, Auditable
 {
     use HasFactory, SoftDeletes, InteractsWithMedia;
+    use \OwenIt\Auditing\Auditable;
+
 
     protected $fillable = [
         'name', 'description', 'status_id', 'owner_id', 'ticket_prefix',
@@ -24,6 +28,11 @@ class Project extends Model implements HasMedia
     protected $appends = [
         'cover'
     ];
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->whereBelongsTo(auth()->user());
+    }
 
     public function owner(): BelongsTo
     {

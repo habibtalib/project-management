@@ -19,8 +19,9 @@ use Laravel\Sanctum\HasApiTokens;
 use ProtoneMedia\LaravelVerifyNewEmail\MustVerifyNewEmail;
 use Ramsey\Uuid\Uuid;
 use Spatie\Permission\Traits\HasRoles;
+use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable implements MustVerifyEmail, FilamentUser
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Auditable
 {
     use HasApiTokens,
         HasFactory,
@@ -30,6 +31,8 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
         HasAvatarUrl,
         SoftDeletes,
         MustVerifyNewEmail;
+
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.

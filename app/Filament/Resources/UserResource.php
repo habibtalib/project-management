@@ -55,11 +55,15 @@ class UserResource extends Resource
                                     ->email()
                                     ->required()
                                     ->rule(
-                                        fn($record) => 'unique:users,email,'
+                                        fn ($record) => 'unique:users,email,'
                                             . ($record ? $record->id : 'NULL')
                                             . ',id,deleted_at,NULL'
                                     )
                                     ->maxLength(255),
+
+                                Forms\Components\TextInput::make('password')
+                                    ->label(__('Password'))
+                                    ->password(),
 
                                 Forms\Components\CheckboxList::make('roles')
                                     ->label(__('Permission roles'))

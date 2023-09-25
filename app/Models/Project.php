@@ -29,10 +29,10 @@ class Project extends Model implements HasMedia, Auditable
         'cover'
     ];
 
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->whereBelongsTo(auth()->user());
-    }
+    // public static function getEloquentQuery(): Builder
+    // {
+    //     return parent::getEloquentQuery()->whereBelongsTo(auth()->user());
+    // }
 
     public function owner(): BelongsTo
     {

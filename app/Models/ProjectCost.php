@@ -14,4 +14,9 @@ class ProjectCost extends Model
     {
         return parent::getEloquentQuery()->whereBelongsTo(auth()->user());
     }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 }

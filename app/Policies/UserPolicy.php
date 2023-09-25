@@ -66,4 +66,14 @@ class UserPolicy
     {
         return $user->can('Delete user');
     }
+
+    public function audit(User $user,  User $model)
+    {
+        return $user->can('Audit user');
+    }
+
+    public function restoreAudit(User $user,  User $model)
+    {
+        return $user->can('Restore Audit user');
+    }
 }

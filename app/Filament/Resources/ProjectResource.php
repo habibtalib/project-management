@@ -2,23 +2,24 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms;
+use App\Models\User;
+use Filament\Tables;
+use App\Models\Ticket;
+use App\Models\Project;
+use Illuminate\Support\Str;
+use Filament\Resources\Form;
+use App\Models\ProjectStatus;
+use Filament\Resources\Table;
+use Filament\Facades\Filament;
+use App\Models\ProjectFavorite;
+use Filament\Resources\Resource;
+use Illuminate\Support\HtmlString;
 use App\Exports\ProjectHoursExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers;
-use App\Models\Project;
-use App\Models\ProjectFavorite;
-use App\Models\ProjectStatus;
-use App\Models\Ticket;
-use App\Models\User;
-use Filament\Facades\Filament;
-use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
-use Filament\Tables;
-use Illuminate\Support\HtmlString;
-use Illuminate\Support\Str;
-use Maatwebsite\Excel\Facades\Excel;
+use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 
 class ProjectResource extends Resource
 {
@@ -270,6 +271,7 @@ class ProjectResource extends Resource
             RelationManagers\UsersRelationManager::class,
             RelationManagers\StatusesRelationManager::class,
             RelationManagers\CostsRelationManager::class,
+            AuditsRelationManager::class,
         ];
     }
 

@@ -2,16 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class ProjectCost extends Model
 {
     use HasFactory;
-
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()->whereBelongsTo(auth()->user());
-    }
 }

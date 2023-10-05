@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             //
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->string('summary')->nullable();
             $table->string('project_code')->nullable();
             $table->string('remarks')->nullable();

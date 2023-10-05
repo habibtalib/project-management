@@ -54,6 +54,7 @@ class RoleResource extends Resource
                                     ->label(__('Permissions'))
                                     ->required()
                                     ->columns(4)
+                                    ->bulkToggleable()
                                     ->relationship('permissions', 'name'),
                             ]),
                     ])

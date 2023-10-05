@@ -31,6 +31,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        if($this->app->environment('production')) {
+            \URL::forceScheme('https');
+        }
         // Configure application
         Model::unguard();
         $this->configureApp();

@@ -2,13 +2,15 @@
 
 namespace App\Filament\Resources\ProjectResource\RelationManagers;
 
+use App\Filament\Resources\ProjectCostResource;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Resources\Table;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Resources\RelationManagers\RelationManager;
 
 class CostsRelationManager extends RelationManager
 {
@@ -42,6 +44,9 @@ class CostsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('justification'),
                 Tables\Columns\TextColumn::make('cost'),
                 Tables\Columns\TextColumn::make('quantity'),
+                Tables\Columns\TextColumn::make('total_cost'),
+                Tables\Columns\TextColumn::make('actual_spending'),
+                Tables\Columns\TextColumn::make('balance'),
             ])
             ->filters([
                 //
@@ -50,6 +55,7 @@ class CostsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make()->url(fn (Model $record): string => ProjectCostResource::getUrl('view', $record)),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])

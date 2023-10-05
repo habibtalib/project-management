@@ -10,6 +10,11 @@ class EditProjectCost extends EditRecord
 {
     protected static string $resource = ProjectCostResource::class;
 
+    protected function getRedirectUrl(): string
+    {
+        return $this->previousUrl ?? $this->getResource()::getUrl('index');
+    }
+
     protected function getActions(): array
     {
         return [

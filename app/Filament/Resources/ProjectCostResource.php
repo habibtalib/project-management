@@ -2,16 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\ProjectCostResource\Pages;
-use App\Filament\Resources\ProjectCostResource\RelationManagers;
-use App\Models\ProjectCost;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
+use App\Models\ProjectCost;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\ProjectCostResource\Pages;
+use App\Filament\Resources\ProjectCostResource\RelationManagers;
+use App\Filament\Resources\ProjectCostResource\RelationManagers\ExpensesRelationManager;
 
 class ProjectCostResource extends Resource
 {
@@ -24,7 +25,7 @@ class ProjectCostResource extends Resource
 
     protected static function getNavigationLabel(): string
     {
-        return __('Projects Cost');
+        return __('Project Costs');
     }
 
     public static function getPluralLabel(): ?string
@@ -43,19 +44,19 @@ class ProjectCostResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('project_id')
                     ->required(),
-                Forms\Components\TextInput::make('project_cost_id'),
+                // Forms\Components\TextInput::make('project_cost_id'),
                 Forms\Components\TextInput::make('description')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('justification')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('cost'),
                 Forms\Components\TextInput::make('quantity'),
-                Forms\Components\TextInput::make('total_cost'),
-                Forms\Components\TextInput::make('actual_spending'),
-                Forms\Components\TextInput::make('balance'),
-                Forms\Components\Toggle::make('checked'),
-                Forms\Components\TextInput::make('receipt')
-                    ->maxLength(255),
+                Forms\Components\TextInput::make('total_cost')->disabled(),
+                Forms\Components\TextInput::make('actual_spending')->disabled(),
+                Forms\Components\TextInput::make('balance')->disabled()
+                // Forms\Components\Toggle::make('checked'),
+                // Forms\Components\TextInput::make('receipt')
+                //     ->maxLength(255),
             ]);
     }
 
@@ -64,7 +65,7 @@ class ProjectCostResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('project_id'),
-                Tables\Columns\TextColumn::make('project_cost_id'),
+                // Tables\Columns\TextColumn::make('project_cost_id'),
                 Tables\Columns\TextColumn::make('description'),
                 Tables\Columns\TextColumn::make('justification'),
                 Tables\Columns\TextColumn::make('cost'),
@@ -74,13 +75,13 @@ class ProjectCostResource extends Resource
                 Tables\Columns\TextColumn::make('balance'),
                 Tables\Columns\IconColumn::make('checked')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('receipt'),
-                Tables\Columns\TextColumn::make('deleted_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
+                // Tables\Columns\TextColumn::make('receipt'),
+                // Tables\Columns\TextColumn::make('deleted_at')
+                //     ->dateTime(),
+                // Tables\Columns\TextColumn::make('created_at')
+                //     ->dateTime(),
+                // Tables\Columns\TextColumn::make('updated_at')
+                //     ->dateTime(),
             ])
             ->filters([
                 //
@@ -98,6 +99,7 @@ class ProjectCostResource extends Resource
     {
         return [
             //
+            ExpensesRelationManager::class
         ];
     }
 

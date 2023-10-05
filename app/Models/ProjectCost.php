@@ -19,4 +19,9 @@ class ProjectCost extends Model
     {
         return $this->belongsTo(Project::class);
     }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
 }

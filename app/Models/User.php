@@ -139,4 +139,10 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser, Aud
     {
         return true;
     }
+
+    public function hasRoleName(String $name)
+    {
+        $role = Role::where('name', $name)->first();
+        return $this->roles->contains($role);
+    }
 }

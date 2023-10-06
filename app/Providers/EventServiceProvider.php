@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
-use App\Listeners\SocialRegistration;
+use App\Models\Project;
 use App\Models\ProjectCost;
+use App\Observers\ProjectObserver;
+use App\Listeners\SocialRegistration;
 use App\Observers\ProjectCostObserver;
-use DutchCodingCompany\FilamentSocialite\Events\Registered as SocialRegistered;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use DutchCodingCompany\FilamentSocialite\Events\Registered as SocialRegistered;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -35,6 +37,7 @@ class EventServiceProvider extends ServiceProvider
     {
         //
         ProjectCost::observe(ProjectCostObserver::class);
+        Project::observe(ProjectObserver::class);
     }
 
     /**

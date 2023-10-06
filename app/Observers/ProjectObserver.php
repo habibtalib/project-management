@@ -14,7 +14,7 @@ class ProjectObserver
      */
     public function created(Project $project)
     {
-        $project->user()->associate(auth()->user());
+        // $project->owner()->associate(auth()->user());
     }
 
     /**

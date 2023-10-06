@@ -139,9 +139,9 @@ class ProjectResource extends Resource
                                 Forms\Components\Grid::make()
                                     ->columns(3)
                                     ->schema([
-                                        Forms\Components\TextInput::make('total_budget')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2)),
-                                        Forms\Components\TextInput::make('total_spending')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2)),
-                                        Forms\Components\TextInput::make('total_balance')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2))
+                                        Forms\Components\TextInput::make('total_budget')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2))->disabled(),
+                                        Forms\Components\TextInput::make('total_spending')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2))->disabled(),
+                                        Forms\Components\TextInput::make('total_balance')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2))->disabled()
                                     ]),
 
                             ]),
@@ -275,10 +275,10 @@ class ProjectResource extends Resource
     public static function getRelations(): array
     {
         return [
+            RelationManagers\CostsRelationManager::class,
             RelationManagers\SprintsRelationManager::class,
             RelationManagers\UsersRelationManager::class,
             RelationManagers\StatusesRelationManager::class,
-            RelationManagers\CostsRelationManager::class,
             AuditsRelationManager::class,
         ];
     }

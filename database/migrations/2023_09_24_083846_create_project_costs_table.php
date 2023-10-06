@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('project_costs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('project_id')->constrained('projects');
-            $table->foreignId('project_cost_id')->nullable();
+            $table->foreignId('cost_attribute_id')->constrained('cost_attributes');
             $table->string('description')->nullable();
             $table->string('justification')->nullable();
             $table->decimal('cost', 10, 2)->nullable();

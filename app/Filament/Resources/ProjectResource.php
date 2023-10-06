@@ -186,19 +186,24 @@ class ProjectResource extends Resource
                     ->label(__('Affected users'))
                     ->limit(2),
 
-                Tables\Columns\BadgeColumn::make('type')
-                    ->enum([
-                        'kanban' => __('Kanban'),
-                        'scrum' => __('Scrum')
-                    ])
-                    ->colors([
-                        'secondary' => 'kanban',
-                        'warning' => 'scrum',
-                    ]),
+
+                Tables\Columns\TextColumn::make('total_budget')
+                    ->label(__('Total Budget'))
+                    ->sortable(),
+
+                // Tables\Columns\BadgeColumn::make('type')
+                //     ->enum([
+                //         'kanban' => __('Kanban'),
+                //         'scrum' => __('Scrum')
+                //     ])
+                //     ->colors([
+                //         'secondary' => 'kanban',
+                //         'warning' => 'scrum',
+                //     ]),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->label(__('Created at'))
-                    ->dateTime()
+                    ->label(__('Created'))
+                    ->since()
                     ->sortable()
                     ->searchable(),
             ])

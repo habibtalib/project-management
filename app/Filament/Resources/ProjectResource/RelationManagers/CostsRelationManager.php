@@ -25,9 +25,9 @@ class CostsRelationManager extends RelationManager
                 Forms\Components\TextInput::make('description')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('justification')
-                    ->required()
-                    ->maxLength(255),
+                // Forms\Components\TextInput::make('justification')
+                //     ->required()
+                //     ->maxLength(255),
                 Forms\Components\TextInput::make('cost')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2)),
                 Forms\Components\TextInput::make('quantity')
                     ->numeric()
@@ -41,7 +41,7 @@ class CostsRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('description'),
-                Tables\Columns\TextColumn::make('justification'),
+                // Tables\Columns\TextColumn::make('justification'),
                 Tables\Columns\TextColumn::make('cost'),
                 Tables\Columns\TextColumn::make('quantity'),
                 Tables\Columns\TextColumn::make('total_cost'),

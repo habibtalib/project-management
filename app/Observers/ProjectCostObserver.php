@@ -17,6 +17,7 @@ class ProjectCostObserver
     public function creating(ProjectCost $projectCost)
     {
         $projectCost->total_cost = $projectCost->cost * $projectCost->quantity;
+        $projectCost->balance = $projectCost->total_cost - $projectCost->actual_spending;
         // $projectCost->project->total_cost = 0;
         // $projectCost->project->save();
         // $projectCost->save();
@@ -48,7 +49,7 @@ class ProjectCostObserver
     public function updating(ProjectCost $projectCost)
     {
         $projectCost->total_cost = $projectCost->cost * $projectCost->quantity;
-        $projectCost->balance = $projectCost->total_cost * $projectCost->actual_spending;
+        $projectCost->balance = $projectCost->total_cost - $projectCost->actual_spending;
         // $projectCost->save();
     }
 

@@ -23,6 +23,7 @@ class ExpensesRelationManager extends RelationManager
                 Forms\Components\TextInput::make('description')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('total_amount')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2)),
             ]);
     }
 
@@ -31,6 +32,7 @@ class ExpensesRelationManager extends RelationManager
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('total_amount'),
             ])
             ->filters([
                 //
@@ -45,5 +47,5 @@ class ExpensesRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    }
 }

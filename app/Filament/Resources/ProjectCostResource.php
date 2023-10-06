@@ -49,11 +49,11 @@ class ProjectCostResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('justification')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('cost'),
+                Forms\Components\TextInput::make('cost')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2)),
                 Forms\Components\TextInput::make('quantity'),
-                Forms\Components\TextInput::make('total_cost')->disabled(),
-                Forms\Components\TextInput::make('actual_spending')->disabled(),
-                Forms\Components\TextInput::make('balance')->disabled()
+                Forms\Components\TextInput::make('total_cost')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2))->disabled(),
+                Forms\Components\TextInput::make('actual_spending')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2))->disabled(),
+                Forms\Components\TextInput::make('balance')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2))->disabled()
                 // Forms\Components\Toggle::make('checked'),
                 // Forms\Components\TextInput::make('receipt')
                 //     ->maxLength(255),

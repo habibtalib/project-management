@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Expense;
 use App\Models\Project;
 use App\Models\ProjectCost;
+use App\Observers\ExpenseObserver;
 use App\Observers\ProjectObserver;
 use App\Listeners\SocialRegistration;
 use App\Observers\ProjectCostObserver;
@@ -38,6 +40,7 @@ class EventServiceProvider extends ServiceProvider
         //
         ProjectCost::observe(ProjectCostObserver::class);
         Project::observe(ProjectObserver::class);
+        Expense::observe(ExpenseObserver::class);
     }
 
     /**

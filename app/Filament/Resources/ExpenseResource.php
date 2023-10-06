@@ -40,17 +40,19 @@ class ExpenseResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('project_cost_id')
+                Forms\Components\TextInput::make('cost.description')
+                    ->label('Project Cost')
                     ->required(),
-                Forms\Components\TextInput::make('project_id')
+                Forms\Components\TextInput::make('project.name')
+                    ->label('Project')
+                    ->disabled(),
+                Forms\Components\TextInput::make('description')
                     ->required(),
-                Forms\Components\TextInput::make('owner_id')
-                    ->required(),
-                Forms\Components\TextInput::make('vendor_id')
-                    ->required(),
-                Forms\Components\TextInput::make('payment_type_id')
-                    ->required(),
-                Forms\Components\TextInput::make('total_amount'),
+                // Forms\Components\TextInput::make('vendor_id')
+                //     ->required(),
+                // Forms\Components\TextInput::make('payment_type_id')
+                //     ->required(),
+                Forms\Components\TextInput::make('total_amount')->mask(fn (Forms\Components\TextInput\Mask $mask) => $mask->money(prefix: 'RM', thousandsSeparator: ',', decimalPlaces: 2)),
                 Forms\Components\TextInput::make('attachment')
                     ->maxLength(255),
             ]);

@@ -17,8 +17,8 @@ class ProjectCostObserver
     public function creating(ProjectCost $projectCost)
     {
         $projectCost->total_cost = $projectCost->cost * $projectCost->quantity;
-        $projectCost->project->total_cost = 0;
-        $projectCost->project->save();
+        // $projectCost->project->total_cost = 0;
+        // $projectCost->project->save();
         // $projectCost->save();
     }
 
@@ -32,6 +32,11 @@ class ProjectCostObserver
     {
         // $projectCost->total_cost = $projectCost->cost * $projectCost->quantity;
         // $projectCost->save();
+        $project = Project::find($projectCost->project_id);
+        $total_costs = ProjectCost::where('project_id', $projectCost->project_id)->sum('total_cost');
+        $project->total_budget = $total_costs;
+        $project->total_balance = $total_costs;
+        $project->save();
     }
 
     /**

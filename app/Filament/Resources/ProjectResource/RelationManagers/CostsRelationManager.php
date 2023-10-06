@@ -3,7 +3,9 @@
 namespace App\Filament\Resources\ProjectResource\RelationManagers;
 
 use App\Filament\Resources\ProjectCostResource;
+use App\Models\CostAttribute;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Tables;
 use Filament\Resources\Form;
 use Filament\Resources\Table;
@@ -33,6 +35,8 @@ class CostsRelationManager extends RelationManager
                     ->numeric()
                     ->required()
                     ->maxLength(255),
+                Select::make('attribute_id')->label('Attribute')
+                    ->options(fn () => CostAttribute::all()->pluck('unit', 'id')->toArray()),
             ]);
     }
 
@@ -44,6 +48,7 @@ class CostsRelationManager extends RelationManager
                 // Tables\Columns\TextColumn::make('justification'),
                 Tables\Columns\TextColumn::make('cost'),
                 Tables\Columns\TextColumn::make('quantity'),
+                Tables\Columns\TextColumn::make('attribute.unit'),
                 Tables\Columns\TextColumn::make('total_cost'),
                 Tables\Columns\TextColumn::make('actual_spending'),
                 Tables\Columns\TextColumn::make('balance'),

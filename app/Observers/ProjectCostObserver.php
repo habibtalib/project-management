@@ -35,8 +35,10 @@ class ProjectCostObserver
         // $projectCost->save();
         $project = Project::find($projectCost->project_id);
         $total_costs = ProjectCost::where('project_id', $projectCost->project_id)->sum('total_cost');
+        $total_spending = ProjectCost::where('project_id', $projectCost->project_id)->sum('actual_spending');
         $project->total_budget = $total_costs;
-        $project->total_balance = $total_costs;
+        $project->total_spending = $total_spending;
+        $project->total_balance = $project->total_budget - $project->total_spending;
         $project->save();
     }
 
@@ -66,8 +68,10 @@ class ProjectCostObserver
         // $projectCost->save();
         $project = Project::find($projectCost->project_id);
         $total_costs = ProjectCost::where('project_id', $projectCost->project_id)->sum('total_cost');
+        $total_spending = ProjectCost::where('project_id', $projectCost->project_id)->sum('actual_spending');
         $project->total_budget = $total_costs;
-        $project->total_balance = $total_costs;
+        $project->total_spending = $total_spending;
+        $project->total_balance = $project->total_budget - $project->total_spending;
         $project->save();
     }
 

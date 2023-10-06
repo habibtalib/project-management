@@ -281,9 +281,10 @@ class ProjectResource extends Resource
     {
         return [
             RelationManagers\CostsRelationManager::class,
-            RelationManagers\SprintsRelationManager::class,
+            // RelationManagers\SprintsRelationManager::class,
             RelationManagers\UsersRelationManager::class,
-            RelationManagers\StatusesRelationManager::class,
+            RelationManagers\ExpensesRelationManager::class,
+            // RelationManagers\StatusesRelationManager::class,
             AuditsRelationManager::class,
         ];
     }

@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Project extends Model implements HasMedia, Auditable
@@ -62,6 +63,16 @@ class Project extends Model implements HasMedia, Auditable
     public function costs(): HasMany
     {
         return $this->hasMany(ProjectCost::class, 'project_id', 'id');
+    }
+
+    // public function expenses(): HasManyThrough
+    // {
+    //     return $this->hasManyThrough(ProjectCost::class, Expense::class, 'project_id', 'id', 'project_cost_id', 'id');
+    // }
+
+    public function expenses(): HasMany
+    {
+        return $this->hasMany(Expense::class, 'project_id', 'id');
     }
 
     public function epics(): HasMany

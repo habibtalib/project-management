@@ -20,6 +20,12 @@ class ProjectCost extends Model
         return $this->belongsTo(Project::class);
     }
 
+
+    public function attribute()
+    {
+        return $this->belongsTo(CostAttribute::class, 'attribute_id');
+    }
+
     public function expenses()
     {
         return $this->hasMany(Expense::class);

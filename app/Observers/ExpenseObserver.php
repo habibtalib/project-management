@@ -7,6 +7,20 @@ use App\Models\ProjectCost;
 
 class ExpenseObserver
 {
+
+    /**
+     * Handle the Expense "created" event.
+     *
+     * @param  \App\Models\Expense  $expense
+     * @return void
+     */
+    public function creating(Expense $expense)
+    {
+        //
+        // $project_cost = ProjectCost::find($expense->project_cost_id);
+        // $expense->project_id = $project_cost->project_id;
+        // $expense->save();
+    }
     /**
      * Handle the Expense "created" event.
      *
@@ -20,6 +34,21 @@ class ExpenseObserver
         $total_cost = Expense::where('project_cost_id', $expense->project_cost_id)->sum('total_amount');
         $project_cost->actual_spending = $total_cost;
         $project_cost->save();
+    }
+
+
+    /**
+     * Handle the Expense "created" event.
+     *
+     * @param  \App\Models\Expense  $expense
+     * @return void
+     */
+    public function updating(Expense $expense)
+    {
+        //
+        $project_cost = ProjectCost::find($expense->project_cost_id);
+        $expense->project_id = $project_cost->project_id;
+        // $expense->save();
     }
 
     /**

@@ -19,6 +19,7 @@ use App\Exports\ProjectHoursExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers;
+use App\Models\Company;
 use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
 
 class ProjectResource extends Resource
@@ -90,6 +91,13 @@ class ProjectResource extends Resource
                                             ->searchable()
                                             ->options(fn () => User::all()->pluck('name', 'id')->toArray())
                                             ->default(fn () => auth()->user()->id)
+                                            ->required(),
+
+                                        Forms\Components\Select::make('company_id')
+                                            ->label(__('Company'))
+                                            ->searchable()
+                                            ->options(fn () => Company::all()->pluck('name', 'id')->toArray())
+                                            // ->default(fn () => auth()->user()->company?->id)
                                             ->required(),
 
                                         Forms\Components\Select::make('status_id')

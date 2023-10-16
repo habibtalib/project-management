@@ -43,7 +43,7 @@ class CompanyResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('owner_id')
-                    ->label(__('Project owner'))
+                    ->label(__('Company owner'))
                     ->searchable()
                     ->options(fn () => User::all()->pluck('name', 'id')->toArray())
                     ->default(fn () => auth()->user()->id)

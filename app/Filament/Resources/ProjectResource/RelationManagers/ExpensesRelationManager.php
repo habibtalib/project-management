@@ -30,7 +30,9 @@ class ExpensesRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('total_amount'),
+                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('cost.description')->label('Cost Item'),
+                Tables\Columns\TextColumn::make('total_amount')->label('Expenses Amount'),
             ])
             ->filters([
                 //
@@ -45,5 +47,5 @@ class ExpensesRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
-    }    
+    }
 }

@@ -12,6 +12,6 @@ class Expense extends Model
 
     public function cost()
     {
-        return $this->belongsTo(ProjectCost::class);
+        return $this->belongsTo(ProjectCost::class, 'project_cost_id');
     }
 }

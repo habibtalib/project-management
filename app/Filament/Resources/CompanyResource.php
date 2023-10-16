@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CompanyResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\CompanyResource\RelationManagers;
+use App\Filament\Resources\CompanyResource\RelationManagers\CompanyUserRelationManager;
 
 class CompanyResource extends Resource
 {
@@ -117,6 +118,7 @@ class CompanyResource extends Resource
     {
         return [
             //
+            RelationManagers\CompanyUserRelationManager::class
         ];
     }
 

@@ -8,7 +8,9 @@ use App\Models\ProjectCost;
 use App\Observers\ExpenseObserver;
 use App\Observers\ProjectObserver;
 use App\Listeners\SocialRegistration;
+use App\Models\User;
 use App\Observers\ProjectCostObserver;
+use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use DutchCodingCompany\FilamentSocialite\Events\Registered as SocialRegistered;
@@ -41,6 +43,7 @@ class EventServiceProvider extends ServiceProvider
         ProjectCost::observe(ProjectCostObserver::class);
         Project::observe(ProjectObserver::class);
         Expense::observe(ExpenseObserver::class);
+        User::observe(UserObserver::class);
     }
 
     /**

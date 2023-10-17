@@ -132,6 +132,7 @@ class UserResource extends Resource
         return [
             //
             AuditsRelationManager::class,
+            RelationManagers\CompanyRelationManager::class
         ];
     }
 

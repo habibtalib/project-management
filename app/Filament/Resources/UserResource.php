@@ -2,18 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
-use App\Models\User;
 use Filament\Forms;
-use Filament\Resources\Form;
-use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Resource;
-use Filament\Resources\Table;
+use App\Models\User;
 use Filament\Tables;
+use Filament\Resources\Form;
+use Filament\Resources\Table;
+use Filament\Resources\Resource;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Facades\Hash;
+use Filament\Resources\Pages\CreateRecord;
+use App\Filament\Resources\UserResource\Pages;
+use App\Filament\Resources\UserResource\RelationManagers;
 use Tapp\FilamentAuditing\RelationManagers\AuditsRelationManager;
+use XliteDev\FilamentImpersonate\Tables\Actions\ImpersonateAction;
 
 class UserResource extends Resource
 {
@@ -119,6 +120,7 @@ class UserResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                ImpersonateAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

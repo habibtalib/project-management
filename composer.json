@@ -32,7 +32,8 @@
         "spatie/laravel-permission": "^5.5",
         "stancl/tenancy": "^3.7",
         "stichoza/google-translate-php": "^4.1",
-        "tapp/filament-auditing": "^2.0"
+        "tapp/filament-auditing": "^2.0",
+        "xlite-dev/filament-impersonate": "^1.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",
